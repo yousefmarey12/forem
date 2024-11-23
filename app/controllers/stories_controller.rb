@@ -137,7 +137,7 @@ class StoriesController < ApplicationController
   end
 
   def handle_base_index
-    @home_page = true
+    @home_page = 
     assign_feed_stories unless user_signed_in? # Feed fetched async for signed-in users
     assign_hero_banner
     assign_hero_html

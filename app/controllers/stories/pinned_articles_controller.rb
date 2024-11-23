@@ -10,7 +10,6 @@ module Stories
 
     def show
       article = PinnedArticle.get
-
       if article.present?
         render json: {
           id: article.id,
@@ -25,7 +24,6 @@ module Stories
 
     def update
       article = Article.published.find(params[:id])
-
       PinnedArticle.set(article)
     rescue ActiveRecord::RecordNotFound => e
       render json: { error: e.message }, status: :unprocessable_entity

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* global insertAfter, insertArticles, buildArticleHTML, nextPage:writable, fetching:writable, done:writable, InstantClick */
 
 // The purpose of initScrolling is to start paginating the page once you reach the bottom of the page.
@@ -447,7 +448,9 @@ function paginate(tag, params, requiresApproval) {
     .then((response) => response.json())
     .then((content) => {
       nextPage += 1;
-      let resultsCollection = useStoriesFeed ? content : content.result
+
+      
+      let resultsCollection = content.result
       insertArticles(resultsCollection);
       const checkBlockedContentEvent = new CustomEvent('checkBlockedContent');
       window.dispatchEvent(checkBlockedContentEvent);
@@ -531,7 +534,6 @@ function checkIfNearBottomOfPage() {
   } else if (loadingElement) {
     loadingElement.style.display = 'block';
   }
-
   fetchNextPageIfNearBottom();
   setInterval(function handleInterval() {
     fetchNextPageIfNearBottom();

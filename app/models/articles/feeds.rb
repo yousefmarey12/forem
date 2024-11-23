@@ -62,7 +62,6 @@ module Articles
     # @return [Articles::Feeds::VariantQuery]
     def self.feed_for(controller:, user:, number_of_articles:, page:, tag:)
       variant = AbExperiment.get_feed_variant_for(controller: controller, user: user)
-
       VariantQuery.build_for(
         variant: variant,
         user: user,

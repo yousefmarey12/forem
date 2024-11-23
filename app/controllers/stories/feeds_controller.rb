@@ -42,12 +42,13 @@ module Stories
       feed = if Settings::UserExperience.feed_strategy == "basic"
                Articles::Feeds::Basic.new(user: current_user, page: @page, tag: params[:tag])
              else
+
                Articles::Feeds.feed_for(
                  user: current_user,
                  controller: self,
                  page: @page,
                  tag: params[:tag],
-                 number_of_articles: 35,
+                 number_of_articles: 25,
                )
              end
       Datadog::Tracing.trace("feed.query",
@@ -59,7 +60,6 @@ module Stories
         # weighted strategy has not.  I also don't want to alter the
         # weighted query implementation as it returns a lovely
         # ActiveRecord::Relation.  So this is a compromise.
-
         feed.more_comments_minimal_weight_randomized(comments_variant: @comments_variant)
       end
     end
